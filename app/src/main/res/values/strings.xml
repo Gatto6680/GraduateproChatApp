@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ChatApp</string>
+    <string name="enter_phone">أدخل رقم الهاتف</string>
+    <string name="send_otp">إرسال رمز التحقق</string>
+    <string name="enter_otp">أدخل رمز التحقق</string>
+    <string name="verify">تحقق</string>
+    <string name="contacts_title">اختر جهة اتصال</string>
+    <string name="chat_with">الدردشة مع %1$s</string>
+    <string name="hint_message">اكتب رسالة...</string>
+    <string name="send">إرسال</string>
+    <string name="time_remaining">الوقت المتبقي: %1$d ثانية</string>
+    <string name="session_ended">انتهت الجلسة</string>
+    <string name="register_title">إنشاء حساب</string>
+    <string name="login_title">تسجيل الدخول</string>
+
+</resources>

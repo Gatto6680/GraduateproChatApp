@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layoutDirection="rtl"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <!-- عنوان الشاشة -->
+    <TextView
+        android:text="الدردشة"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_weight="3"
+        android:textColor="@color/textPrimary"
+        android:fontFamily="@font/alhadari"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btnLogout"
+        android:text="خروج"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+    <!-- المؤقت -->
+    <TextView
+        android:id="@+id/tvTimer"
+        android:text="الزمن المتبقي: 10:00"
+        android:textSize="16sp"
+        android:textColor="@color/textPrimary"
+        android:fontFamily="@font/alhadari"
+        android:layout_marginTop="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- قائمة الرسائل -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+        android:elevation="3dp"
+        android:padding="8dp"
+        android:layout_marginTop="12dp"
+        android:clipToPadding="false"/>
+
+    <!-- إدخال الرسالة وزر الإرسال -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/etMessage"
+            android:hint="اكتب رسالتك هنا..."
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_background"
+            android:padding="12dp"
+            android:textColor="@color/textPrimary"
+            android:textSize="16sp"
+            android:fontFamily="@font/alhadari"
+            android:inputType="textMultiLine"
+            android:maxLines="4"
+            android:minHeight="48dp"/>
+
+        <Button
+            android:id="@+id/btnSend"
+            android:text="إرسال"
+            android:backgroundTint="@color/primary"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:fontFamily="@font/alhadari"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:minHeight="48dp"
+            android:elevation="2dp"/>
+    </LinearLayout>
+</LinearLayout>

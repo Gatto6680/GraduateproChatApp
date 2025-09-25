@@ -10,8 +10,8 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DB_NAME = "chat_app.db";
-    public static final int DB_VERSION = 1;
+    public static final String DB_NAME = "chat_app2.db";
+    public static final int DB_VERSION = 2;
 
 
     public static final String TABLE_USERS = "users";
@@ -48,14 +48,20 @@ public class DBHelper extends SQLiteOpenHelper {
                 COL_MSG_TEXT + " TEXT," +
                 COL_MSG_TIME + " INTEGER" +
                 ");";
+        String createBlockedUsers = "CREATE TABLE IF NOT EXISTS BlockedUsers (" +
+                "phone TEXT PRIMARY KEY" +
+                ");";
 
         db.execSQL(createUsers);
         db.execSQL(createMessages);
+        db.execSQL(createBlockedUsers); // ✅ أضف هذا السطر هنا أيضًا
+
     }
 
     @Override public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MESSAGES);
+        db.execSQL("DROP TABLE IF EXISTS BlockedUsers"); // ✅ تأكد من حذف الجدول القديم
         onCreate(db);
     }
 
@@ -136,6 +142,22 @@ public class DBHelper extends SQLiteOpenHelper {
         int rows = db.update(TABLE_USERS, cv, COL_PHONE + "=?", new String[]{phone});
         return rows > 0;
     }
+    public void blockUser(String phone) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("phone", phone);
+        db.insertWithOnConflict("BlockedUsers", null, cv, SQLiteDatabase.CONFLICT_IGNORE);
+    }
+
+    public boolean isUserBlocked(String phone) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT phone FROM BlockedUsers WHERE phone = ?", new String[]{phone});
+        boolean blocked = cursor.moveToFirst();
+        cursor.close();
+        return blocked;
+    }
+
+
 
 
     public int getChatDuration(String phone) {
@@ -169,4 +191,6 @@ public class DBHelper extends SQLiteOpenHelper {
         int rows = db.delete(TABLE_USERS, COL_PHONE + "=?", new String[]{(String) phone});
         return rows > 0;
     }
+
+
 }

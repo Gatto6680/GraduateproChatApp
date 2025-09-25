@@ -63,7 +63,7 @@ public class UserChatActivity extends AppCompatActivity {
         });
 
         b.btnLogout.setOnClickListener(v -> {
-            sm.logout();
+            sm.logout(db);
             finish();
         });
     }
@@ -83,16 +83,19 @@ public class UserChatActivity extends AppCompatActivity {
                 b.etMessage.setEnabled(false);
                 b.btnSend.setEnabled(false);
 
+                // ✅ تسجيل الخروج وحظر المستخدم بناءً على رقمه
+                sm.logout(db);
+
+                // ✅ عرض رسالة الحظر
                 new androidx.appcompat.app.AlertDialog.Builder(UserChatActivity.this)
                         .setTitle("انتهاء الزمن ⏰")
-                        .setMessage("انتهى زمن الدردشة المسموح به لك.\nاضغط \"حسنًا\" لإغلاق التطبيق.")
+                        .setMessage("انتهى زمن الدردشة المسموح به لك.\nتم حظرك نهائيًا من استخدام التطبيق.\nاضغط \"حسنًا\" لإغلاق التطبيق.")
                         .setCancelable(false)
-                        .setPositiveButton("حسنًا", (dialog, which) -> {
-                            sm.logout(); // تسجيل الخروج
-                            finish();    // إغلاق الشاشة الحالية
-                        })
+                        .setPositiveButton("حسنًا", (dialog, which) -> finish())
                         .show();
             }
+
+
 
         }.start();
     }

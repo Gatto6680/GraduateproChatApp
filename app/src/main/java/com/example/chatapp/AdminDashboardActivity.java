@@ -43,7 +43,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         loadUsers();
 
         b.btnLogout.setOnClickListener(v -> {
-            new SessionManager(this).logout();
+            new SessionManager(this).logout(db);
             finish();
         });
         b.btnRefresh.setOnClickListener(v -> {

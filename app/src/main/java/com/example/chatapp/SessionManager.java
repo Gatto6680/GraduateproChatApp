@@ -8,6 +8,8 @@ public class SessionManager {
     private static final String KEY_LOGGED_IN = "logged_in";
     private static final String KEY_PHONE = "phone";
     private static final String KEY_IS_ADMIN = "is_admin";
+    private static final String KEY_PERMANENT_BLOCK = "permanent_block1";
+
     private final SharedPreferences sp;
 
     public SessionManager(Context ctx) {
@@ -28,9 +30,16 @@ public class SessionManager {
                 .apply();
     }
 
-    public void logout() {
-        sp.edit().clear().apply();
+    public void logout(DBHelper db) {
+        String phone = getPhone();
+        if (phone != null) {
+            db.blockUser(phone); // حظر المستخدم في قاعدة البيانات
+        }
+        sp.edit().clear().apply(); // تسجيل الخروج
     }
+
+
+
 
     public boolean isLoggedIn() { return sp.getBoolean(KEY_LOGGED_IN, false); }
     public boolean isAdmin() { return sp.getBoolean(KEY_IS_ADMIN, false); }
